@@ -16,19 +16,19 @@ variable "lambda_function_name" {
   default = "HelloLambda"
 }
 
-variable "increment_timeout" {
+variable "lambda_timeout" {
   description = "incrementar timerout a 10s"
   type = number
   default = 10
 }
 
-variable "memory_lambda" {
+variable "lambda_memory" {
   description = "incrementar la memoria"
   type = number
   default = 256
 }
 
-variable "enviroment" {
+variable "environment" {
   description = "entorno (dev, stagin, prod)"
   type = string
   default = "dev"

@@ -1,15 +1,39 @@
-resource "aws_aim_role" "lambda_role" {
+resource "aws_iam_role" "lambda_role" {
     name= "${var.lambda_function_name}-role"
     assume_role_policy= jsonencode({
-        version="2026-10-17"
-        Statement=[{
-            Action = "sts:AssumeRole"
-            Effect = "Allow"
-            Principal = {
-                service= "lambda.amazonaws.com"
+        Version="2012-10-17"
+        Statement=[
+            {
+            Action      = "sts:AssumeRole"
+            Effect      = "Allow"
+            Principal   = {
+                Service = "lambda.amazonaws.com"
+                }
             }
-        }]
-    }
+        ]
+    })
+}
+
+resource "aws_iam_role_policy_attachment" "lambda_basic_execution" {
+    role = aws_iam_role.lambda_role.name
+    policy_arn = "arn:aws:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+}
+
+resource "aws_iam_role_policy" "lambda_dynamodb_access" {
+    name = "lambda-dynamodb-access"
+    role = aws_iam_role.lambda_role.id
+    policy = jsonencode(
+        {
+            Version="2012-10-17"
+            Statement= [{
+                Effect = "Allow"
+                Action=[
+                    "dynamodb:PutItem",
+                    "dynamodb:GetItem",
+                    "dynamodb:Scan"
+                ]
+                Resource = aws_dynamodb_table.cost_reports.arn
+            }]
+        }
     )
-  ###### here
 }
