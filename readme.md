@@ -19,9 +19,12 @@ terraform plan
 terraform apply
 ```
 
-# Evento de prueba
+# Evento de prueba 
+
 {
   "body": "{\"service\":\"EC2\",\"cost\":12.50}"
 }
 
+```bash
 terraform destroy
+```
