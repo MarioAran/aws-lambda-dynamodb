@@ -9,7 +9,7 @@ TABLE_NAME = os.environ.get('TABLE_NAME', 'CostReports')
 table = dynamodb.Table(TABLE_NAME)
 def convert_floats_to_decimal(obj):
     if isinstance(obj, float):
-        return Decimal(str(obj))  # Decimal funciona porque lo importamos arriba
+        return Decimal(str(obj))
     elif isinstance(obj, dict):
         return {k: convert_floats_to_decimal(v) for k, v in obj.items()}
     elif isinstance(obj, list):

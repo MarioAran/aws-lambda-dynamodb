@@ -12,6 +12,6 @@ resource "aws_dynamodb_table" "cost_reports" {
         Name        = var.dynamodb_table_name
         Enviroment  = var.environment
         Project     = "Devops-Learning"
-        ManagedBy   ="terraform"
+        ManagedBy   = "terraform"
     }
 }
